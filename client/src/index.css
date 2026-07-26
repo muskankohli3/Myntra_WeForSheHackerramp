@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #fef1f4;
+  --color-brand-100: #fde3ea;
+  --color-brand-200: #fbc7d6;
+  --color-brand-300: #f79bb4;
+  --color-brand-400: #f16389;
+  --color-brand-500: #e11d48;
+  --color-brand-600: #c81440;
+  --color-brand-700: #a80f37;
+  --color-brand-800: #8c1032;
+  --color-brand-900: #78112e;
+
+  --font-sans: "Segoe UI", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #f8f8fb;
+  color: #1f1f28;
+}
+
+/* thin, unobtrusive scrollbars for chat/comment panels */
+.thin-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 999px;
+}
+
+.live-pulse {
+  animation: live-pulse 1.6s ease-in-out infinite;
+}
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Floating reaction emojis on the live session screen (see ReactionLayer.jsx) */
+.floating-reaction {
+  animation: float-up 2.2s ease-out forwards;
+}
+@keyframes float-up {
+  0% { opacity: 0; transform: translateY(0) scale(0.6); }
+  15% { opacity: 1; transform: translateY(-1.5rem) scale(1.1); }
+  100% { opacity: 0; transform: translateY(-14rem) scale(1); }
+}
