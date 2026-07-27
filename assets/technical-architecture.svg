@@ -1,0 +1,125 @@
+<svg width="1240" height="1030" viewBox="0 0 1240 1030" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+  <title>Myntra for Bharat technical architecture</title>
+  <desc>React client talking to a Node.js Express and Socket.io backend, MongoDB for storage, direct peer to peer WebRTC video between seller and customer browsers, and the Google Gemini API for generative features.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1,1 L9,5 L1,9 Z" fill="#5F5E5A"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1240" height="1030" fill="#FFFFFF"/>
+
+  <!-- Title -->
+  <text x="620" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#1A1A18">Myntra for Bharat: technical architecture</text>
+  <text x="620" y="58" text-anchor="middle" font-size="13" fill="#5F5E5A">React client, a single Node.js server (Express + Socket.io), MongoDB, and the Google Gemini API</text>
+
+  <!-- ================= CLIENT TIER ================= -->
+
+  <!-- Seller browser -->
+  <rect x="40" y="90" width="460" height="200" rx="12" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+  <text x="60" y="122" font-size="16" font-weight="600" fill="#0C447C">Seller browser</text>
+  <text x="60" y="140" font-size="12" fill="#185FA5">React 19 + Vite single-page app</text>
+  <text x="60" y="168" font-size="13" fill="#185FA5">• Live Studio (broadcaster), useBroadcaster hook</text>
+  <text x="60" y="190" font-size="13" fill="#185FA5">• Dashboard, Products, Analytics, Regional Insights</text>
+  <text x="60" y="212" font-size="13" fill="#185FA5">• services/api.js + services/socket.js (Socket.io)</text>
+  <text x="60" y="234" font-size="13" fill="#185FA5">• Captions: Speech Recognition API + Gemini translate</text>
+
+  <!-- Customer browser -->
+  <rect x="740" y="90" width="460" height="200" rx="12" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+  <text x="760" y="122" font-size="16" font-weight="600" fill="#0C447C">Customer browser</text>
+  <text x="760" y="140" font-size="12" fill="#185FA5">React 19 + Vite single-page app</text>
+  <text x="760" y="168" font-size="13" fill="#185FA5">• Live Session (viewer), useViewer hook</text>
+  <text x="760" y="190" font-size="13" fill="#185FA5">• Home, Live Discovery, Cart, Checkout, Orders</text>
+  <text x="760" y="212" font-size="13" fill="#185FA5">• services/api.js + services/socket.js (Socket.io)</text>
+  <text x="760" y="234" font-size="13" fill="#185FA5">• NearbyRecommendations, translated captions display</text>
+
+  <!-- WebRTC P2P connector between browsers -->
+  <line x1="500" y1="190" x2="740" y2="190" stroke="#5F5E5A" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="620" y="144" text-anchor="middle" font-size="13" font-weight="600" fill="#1A1A18">WebRTC media (P2P)</text>
+  <text x="620" y="229" text-anchor="middle" font-size="12" fill="#5F5E5A">direct video/audio,</text>
+  <text x="620" y="245" text-anchor="middle" font-size="12" fill="#5F5E5A">browser to browser,</text>
+  <text x="620" y="261" text-anchor="middle" font-size="12" fill="#5F5E5A">1 connection per viewer</text>
+
+  <!-- Connectors: clients down to backend -->
+  <line x1="270" y1="290" x2="270" y2="440" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="285" y="361" font-size="12" fill="#1A1A18">REST (HTTPS) +</text>
+  <text x="285" y="378" font-size="12" fill="#1A1A18">Socket.io (WSS)</text>
+
+  <line x1="970" y1="290" x2="970" y2="440" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="855" y="361" font-size="12" fill="#1A1A18">REST (HTTPS) +</text>
+  <text x="855" y="378" font-size="12" fill="#1A1A18">Socket.io (WSS)</text>
+
+  <!-- ================= APPLICATION TIER ================= -->
+
+  <rect x="40" y="440" width="1160" height="350" rx="14" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.5"/>
+  <text x="60" y="468" font-size="16" font-weight="700" fill="#2C2C2A">Application server (Node.js, single process)</text>
+  <text x="60" y="486" font-size="12" fill="#5F5E5A">Express REST API and Socket.io share one HTTP server (server.js)</text>
+
+  <!-- Box 1: Express REST API -->
+  <rect x="60" y="510" width="548" height="120" rx="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+  <text x="84" y="544" font-size="15" font-weight="600" fill="#3C3489">Express REST API</text>
+  <text x="84" y="566" font-size="12" fill="#534AB7">routes to controllers to Mongoose models</text>
+  <text x="84" y="586" font-size="12" fill="#534AB7">JWT middleware guards seller/customer routes</text>
+  <text x="84" y="606" font-size="12" fill="#534AB7">18 resource route groups (auth, products, orders...)</text>
+
+  <!-- Box 2: Socket.io real-time layer -->
+  <rect x="632" y="510" width="548" height="120" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+  <text x="656" y="544" font-size="15" font-weight="600" fill="#085041">Socket.io real-time layer</text>
+  <text x="656" y="566" font-size="12" fill="#0F6E56">chat, reactions, polls, promotions, Q&amp;A</text>
+  <text x="656" y="586" font-size="12" fill="#0F6E56">viewer counts, follower notifications</text>
+  <text x="656" y="606" font-size="12" fill="#0F6E56">WebRTC signaling relay + 20s live-assistant loop</text>
+
+  <!-- Box 3: Growth engine (rule-based) -->
+  <rect x="60" y="650" width="548" height="120" rx="10" fill="#FAECE7" stroke="#993C1D" stroke-width="1"/>
+  <text x="84" y="684" font-size="15" font-weight="600" fill="#712B13">Growth engine (rule-based)</text>
+  <text x="84" y="706" font-size="12" fill="#993C1D">recommendationEngine.js: location + browsing history</text>
+  <text x="84" y="726" font-size="12" fill="#993C1D">liveAssistant.js: threshold nudges, no LLM call</text>
+  <text x="84" y="746" font-size="12" fill="#993C1D">instant, free, fully explainable scoring</text>
+
+  <!-- Box 4: Gemini AI services -->
+  <rect x="632" y="650" width="548" height="120" rx="10" fill="#FAEEDA" stroke="#854F0B" stroke-width="1"/>
+  <text x="656" y="684" font-size="15" font-weight="600" fill="#633806">Gemini AI services</text>
+  <text x="656" y="706" font-size="12" fill="#854F0B">naming, translation, rewriting, summarization</text>
+  <text x="656" y="726" font-size="12" fill="#854F0B">geminiClient.js wraps every Gemini call</text>
+  <text x="656" y="746" font-size="12" fill="#854F0B">falls back gracefully with no API key set</text>
+
+  <!-- ================= DATA & EXTERNAL TIER ================= -->
+
+  <!-- Seed script (dev-time only) -->
+  <rect x="40" y="830" width="150" height="140" rx="10" fill="#F5F4EF" stroke="#888780" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="56" y="864" font-size="14" font-weight="600" fill="#444441">seed/seed.js</text>
+  <text x="56" y="884" font-size="11" fill="#5F5E5A">dev-time only</text>
+  <text x="56" y="902" font-size="11" fill="#5F5E5A">npm run seed</text>
+  <text x="56" y="920" font-size="11" fill="#5F5E5A">full demo dataset</text>
+
+  <!-- MongoDB -->
+  <rect x="210" y="830" width="430" height="140" rx="10" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1"/>
+  <text x="234" y="864" font-size="15" font-weight="600" fill="#27500A">MongoDB</text>
+  <text x="234" y="886" font-size="12" fill="#3B6D11">local instance or Atlas cluster, single database</text>
+  <text x="234" y="908" font-size="12" fill="#3B6D11">14 collections including Seller, Product, Order,</text>
+  <text x="234" y="930" font-size="12" fill="#3B6D11">LiveSession, Review, RegionalDemand, Notification</text>
+
+  <!-- Google Gemini API (external) -->
+  <rect x="680" y="830" width="480" height="140" rx="10" fill="#FCF3E1" stroke="#854F0B" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="704" y="864" font-size="15" font-weight="600" fill="#633806">Google Gemini API</text>
+  <text x="704" y="886" font-size="12" fill="#854F0B">third-party generative AI service (external)</text>
+  <text x="704" y="908" font-size="12" fill="#854F0B">model: gemini-3.1-flash-lite via @google/genai SDK</text>
+  <text x="704" y="930" font-size="12" fill="#854F0B">reached only from services/gemini/geminiClient.js</text>
+
+  <!-- Connector: seed script into MongoDB -->
+  <line x1="190" y1="900" x2="208" y2="900" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="199" y="888" text-anchor="middle" font-size="10" fill="#5F5E5A">once</text>
+
+  <!-- Connector: backend down to MongoDB -->
+  <polyline points="300,790 300,808 425,808 425,828" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="362" y="802" text-anchor="middle" font-size="12" fill="#1A1A18">Mongoose ODM</text>
+
+  <!-- Connector: Gemini services box out to external Gemini API -->
+  <line x1="906" y1="770" x2="918" y2="828" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="935" y="802" font-size="12" fill="#1A1A18">HTTPS via</text>
+  <text x="935" y="814" font-size="12" fill="#1A1A18">@google/genai</text>
+
+  <!-- Legend -->
+  <text x="620" y="1000" text-anchor="middle" font-size="11" fill="#5F5E5A">Solid border: part of this app's own code. Dashed border: a third-party service, or a dev-only step.</text>
+</svg>
